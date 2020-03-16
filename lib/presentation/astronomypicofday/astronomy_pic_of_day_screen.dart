@@ -6,7 +6,7 @@ import 'package:space_nasa/injection/injection.dart';
 import 'package:space_nasa/presentation/astronomypicofday/astronomy_pic_day_presenter.dart';
 
 class AstronomyPicOfDayScreen extends StatefulWidget {
-  AstronomyPicOfDayScreen();
+//  AstronomyPicOfDayScreen();
 
   @override
   _AstronomyPicOfDayScreenState createState() =>
@@ -35,8 +35,8 @@ class _AstronomyPicOfDayScreenState extends State<AstronomyPicOfDayScreen>
       return Center(
         child: ListView(
           children: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+            Wrap(
+              alignment: WrapAlignment.center,
               children: <Widget>[
                 Padding(
                   padding: EdgeInsets.all(10.0),

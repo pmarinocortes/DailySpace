@@ -1,5 +1,5 @@
 import 'package:space_nasa/data/datasources/local/astronomy_pic_of_day_local_datasource.dart';
-import 'package:space_nasa/data/datasources/remote/astronomy_pic_of_day_datasource.dart';
+import 'package:space_nasa/data/datasources/remote/astronomy_pic_of_day_remote_datasource.dart';
 import 'package:space_nasa/data/repository/model/astronomy_pic_of_day_entity.dart';
 import 'package:space_nasa/domain/data_policy.dart';
 

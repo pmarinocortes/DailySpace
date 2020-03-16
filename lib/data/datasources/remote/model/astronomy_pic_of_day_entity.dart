@@ -19,41 +19,6 @@ class AstronomyPicOfDayRemoteEntity {
   String title;
   String url;
 
-//  factory AstronomyPicOfDayRemoteEntity(Map json) {
-//    return AstronomyPicOfDayRemoteEntity.deserialize(json);
-//  }
-//
-//  AstronomyPicOfDayRemoteEntity.deserialize(Map json)
-//      : date = json["date"],
-//        explanation = json["explanation"],
-//        hdurl = json["hdurl"],
-//        media_type = json["media_type"],
-//        service_version = json["service_version"],
-//        title = json["title"],
-//        url = json["url"];
-//
-//  AstronomyPicOfDayEntity toAstronomyPicOfDayEntity() {
-//    return AstronomyPicOfDayEntity(
-//        date: this.date,
-//        explanation: this.explanation,
-//        hdurl: this.hdurl,
-//        media_type: this.media_type,
-//        service_version: this.service_version,
-//        title: this.title,
-//        url: this.url);
-//  }
-//
-//  AstronomyPicOfDayLocalEntity toAstronomyPicOfDayLocalEntity() {
-//    return AstronomyPicOfDayLocalEntity(
-//        date: this.date,
-//        explanation: this.explanation,
-//        hdurl: this.hdurl,
-//        media_type: this.media_type,
-//        service_version: this.service_version,
-//        title: this.title,
-//        url: this.url);
-//  }
-
   AstronomyPicOfDayRemoteEntity(
       {this.date,
       this.explanation,
