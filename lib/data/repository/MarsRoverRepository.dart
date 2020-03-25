@@ -40,8 +40,6 @@ class MarsRoverRepositoryImpl implements MarsRoverRepository {
 
     if (remoteResponse != null) {
       return MarsRoverEntity(
-//          img_src: remoteResponse.img_src,
-//          earth_date: remoteResponse.earth_date
       photos: remoteResponse.photos
       );
     } else {

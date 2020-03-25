@@ -1,4 +1,4 @@
-import 'package:space_nasa/data/datasources/remote/model/marsrover/mars_rover_entity.dart';
+import 'package:space_nasa/data/datasources/remote/model/marsrover/mars_rover_remote_entity.dart';
 import 'package:space_nasa/data/datasources/remote/utils/constants.dart';
 import 'package:space_nasa/data/datasources/remote/utils/http_handler.dart';
 import 'package:space_nasa/data/datasources/remote/utils/secrets.dart';

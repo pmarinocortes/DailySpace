@@ -19,7 +19,7 @@ class _HomeState extends State<Home> {
           centerTitle: true,
           title: Text("Nasa Daily"),
         ),
-        body: IndexedStack(
+        body: Stack(
           children: <Widget>[_children[_currentIndex]],
         ),
         bottomNavigationBar: BottomNavigationBar(

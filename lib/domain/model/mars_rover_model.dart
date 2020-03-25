@@ -8,10 +8,10 @@
 //});
 //}
 
-import 'package:space_nasa/data/datasources/remote/model/marsrover/mars_rover_photo_entity.dart';
+import 'package:space_nasa/data/datasources/remote/model/marsrover/mars_rover_photo_remote_entity.dart';
 
 class MarsRover {
-  List<MarsRoverPhotoEntity> photos;
+  List<MarsRoverPhotoRemoteEntity> photos;
 
   MarsRover({
     this.photos

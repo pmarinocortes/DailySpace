@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:space_nasa/domain/model/mars_rover_model.dart';
-import 'package:space_nasa/domain/model/mars_rover_model.dart'
-    as MarsRoverModel;
+import 'package:space_nasa/domain/model/mars_rover_photo_model.dart';
+import 'package:space_nasa/domain/model/mars_rover_photo_model.dart'
+    as MarsRoverPhotoModel;
 import 'package:space_nasa/injection/injection.dart';
 import 'package:space_nasa/presentation/marsrover/mars_rover_presenter.dart';
 
@@ -15,7 +15,7 @@ class MarsRoverScreen extends StatefulWidget {
 class _MarsRoverScreenState extends State<MarsRoverScreen>
     implements MarsRoverViewTranslator {
   MarsRoverPresenter _presenter;
-  MarsRoverModel.MarsRover _marsRoverModel;
+  List<MarsRoverPhotoModel.MarsRoverPhoto> _marsRoverModel;
 
   _MarsRoverScreenState() {
     _presenter =
@@ -33,7 +33,7 @@ class _MarsRoverScreenState extends State<MarsRoverScreen>
     if (_marsRoverModel != null) {
       return Center(
         child: ListView.builder(
-            itemCount: _marsRoverModel.photos.length,
+            itemCount: _marsRoverModel.length,
             itemBuilder: (context, index) {
               return Wrap(
                 alignment: WrapAlignment.center,
@@ -42,7 +42,7 @@ class _MarsRoverScreenState extends State<MarsRoverScreen>
                     padding: EdgeInsets.all(10.0),
                     child: Text(
                       "Mars Rover Photos: " +
-                          _marsRoverModel.photos[index].earth_date,
+                          _marsRoverModel[index].earth_date,
                       style: TextStyle(
                           fontWeight: FontWeight.bold, fontSize: 16.0),
                     ),
@@ -50,7 +50,7 @@ class _MarsRoverScreenState extends State<MarsRoverScreen>
                   Padding(
                     padding: EdgeInsets.all(10.0),
                     child: Image.network(
-                      _marsRoverModel.photos[index].img_src,
+                      _marsRoverModel[index].img_src,
                     ),
                   ),
                 ],
@@ -68,9 +68,9 @@ class _MarsRoverScreenState extends State<MarsRoverScreen>
   }
 
   @override
-  showMarsRoverPhoto(MarsRover marsRover) {
+  showMarsRoverPhoto(List<MarsRoverPhoto> marsRoverPhotos) {
     setState(() {
-      _marsRoverModel = marsRover;
+      _marsRoverModel = marsRoverPhotos;
     });
   }
 }

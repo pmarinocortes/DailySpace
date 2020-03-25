@@ -1,15 +1,16 @@
 import 'package:space_nasa/data/datasources/local/astronomy_pic_of_day_local_datasource.dart';
+import 'package:space_nasa/data/datasources/local/database_helper.dart';
+import 'package:space_nasa/data/datasources/local/model/astronomy_pic_of_day_local_entity.dart';
 import 'package:space_nasa/data/datasources/remote/astronomy_pic_of_day_remote_datasource.dart';
+import 'package:space_nasa/data/datasources/remote/model/astronomy_pic_of_day_remote_entity.dart';
 import 'package:space_nasa/data/repository/model/astronomy_pic_of_day_entity.dart';
 import 'package:space_nasa/domain/data_policy.dart';
 
-class AstronomyPicOfDayRepositoryImpl
-    implements AstronomyPicOfDayRepository {
+class AstronomyPicOfDayRepositoryImpl implements AstronomyPicOfDayRepository {
   AstronomyPicOfDayRemoteDataSource _remoteDataSource;
   AstronomyPicOfDayLocalDataSource _localDataSource;
 
-  AstronomyPicOfDayRepositoryImpl(
-      this._remoteDataSource);
+  AstronomyPicOfDayRepositoryImpl(this._remoteDataSource);
 
   @override
   Future<AstronomyPicOfDayEntity> getPicOfDay(DataPolicy dataPolicy) {
@@ -29,34 +30,40 @@ class AstronomyPicOfDayRepositoryImpl
     var localResponse = await _localDataSource.getPicOfDay();
 
     if (localResponse != null) {
-      return AstronomyPicOfDayEntity(
-          date: localResponse.date,
-          explanation: localResponse.explanation,
-          hdurl: localResponse.hdurl,
-          media_type: localResponse.media_type,
-          service_version: localResponse.service_version,
-          title: localResponse.title,
-          url: localResponse.url);
+      return fromLocalEntityToAstronomyPicOfDayEntity(localResponse);
     } else {
-      throw Exception("Error: Empty local response");
+      return _getPicOfDayFromRemote();
     }
   }
 
   Future<AstronomyPicOfDayEntity> _getPicOfDayFromRemote() async {
     var remoteResponse = await _remoteDataSource.getPicOfDay();
+    savePicOfDay(remoteResponse);
 
     if (remoteResponse != null) {
-      return AstronomyPicOfDayEntity(
-          date: remoteResponse.date,
-          explanation: remoteResponse.explanation,
-          hdurl: remoteResponse.hdurl,
-          media_type: remoteResponse.media_type,
-          service_version: remoteResponse.service_version,
-          title: remoteResponse.title,
-          url: remoteResponse.url);
+      return fromRemoteEntityToAstronomyPicOfDayEntityEntity(remoteResponse);
     } else {
       throw Exception("Error: Empty remote response");
     }
+  }
+
+  void savePicOfDay(AstronomyPicOfDayRemoteEntity picOfDay) {
+    DatabaseHelper.db.savePicOfDay(picOfDay.toAstronomyPicOfDayLocalEntity());
+  }
+
+//  void savePicOfDay(List<AstronomyPicOfDayRemoteEntity> picOfDay) {
+//    DatabaseHelper.db.savePicOfDay(
+//        picOfDay.map((pic) => pic.toAstronomyPicOfDayLocalEntity()).toList());
+//  }
+
+  AstronomyPicOfDayEntity fromRemoteEntityToAstronomyPicOfDayEntityEntity(
+      AstronomyPicOfDayRemoteEntity picOfDayRemoteEntity) {
+    return picOfDayRemoteEntity.toAstronomyPicOfDayEntity();
+  }
+
+  AstronomyPicOfDayEntity fromLocalEntityToAstronomyPicOfDayEntity(
+      AstronomyPicOfDayLocalEntity picOfDayLocalEntity) {
+    return picOfDayLocalEntity.toAstronomyPicOfDayEntity();
   }
 }
 

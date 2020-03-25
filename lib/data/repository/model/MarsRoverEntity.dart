@@ -1,4 +1,4 @@
-import 'package:space_nasa/data/datasources/remote/model/marsrover/mars_rover_photo_entity.dart';
+import 'package:space_nasa/data/datasources/remote/model/marsrover/mars_rover_photo_remote_entity.dart';
 import 'package:space_nasa/domain/model/mars_rover_model.dart';
 
 //class MarsRoverEntity {
@@ -13,7 +13,7 @@ import 'package:space_nasa/domain/model/mars_rover_model.dart';
 //}
 
 class MarsRoverEntity {
-  List<MarsRoverPhotoEntity> photos;
+  List<MarsRoverPhotoRemoteEntity> photos;
 
   MarsRoverEntity({this.photos});
 
