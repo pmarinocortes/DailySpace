@@ -10,10 +10,11 @@ class AstronomyPicOfDayRepositoryImpl implements AstronomyPicOfDayRepository {
   AstronomyPicOfDayRemoteDataSource _remoteDataSource;
   AstronomyPicOfDayLocalDataSource _localDataSource;
 
-  AstronomyPicOfDayRepositoryImpl(this._remoteDataSource);
+  AstronomyPicOfDayRepositoryImpl(
+      this._remoteDataSource, this._localDataSource);
 
   @override
-  Future<AstronomyPicOfDayEntity> getPicOfDay(DataPolicy dataPolicy) {
+  Future<AstronomyPicOfDayEntity> getPicOfDay(DataPolicy dataPolicy) async {
     switch (dataPolicy) {
       case DataPolicy.LOCAL:
         return _getPicOfDayFromLocal();
@@ -38,7 +39,9 @@ class AstronomyPicOfDayRepositoryImpl implements AstronomyPicOfDayRepository {
 
   Future<AstronomyPicOfDayEntity> _getPicOfDayFromRemote() async {
     var remoteResponse = await _remoteDataSource.getPicOfDay();
-    savePicOfDay(remoteResponse);
+//    savePicOfDay(remoteResponse);
+    _localDataSource
+        .savePicOfDay(fromRemoteToAstronomyPicOfDayLocalEntity(remoteResponse));
 
     if (remoteResponse != null) {
       return fromRemoteEntityToAstronomyPicOfDayEntityEntity(remoteResponse);
@@ -51,11 +54,6 @@ class AstronomyPicOfDayRepositoryImpl implements AstronomyPicOfDayRepository {
     DatabaseHelper.db.savePicOfDay(picOfDay.toAstronomyPicOfDayLocalEntity());
   }
 
-//  void savePicOfDay(List<AstronomyPicOfDayRemoteEntity> picOfDay) {
-//    DatabaseHelper.db.savePicOfDay(
-//        picOfDay.map((pic) => pic.toAstronomyPicOfDayLocalEntity()).toList());
-//  }
-
   AstronomyPicOfDayEntity fromRemoteEntityToAstronomyPicOfDayEntityEntity(
       AstronomyPicOfDayRemoteEntity picOfDayRemoteEntity) {
     return picOfDayRemoteEntity.toAstronomyPicOfDayEntity();
@@ -64,6 +62,11 @@ class AstronomyPicOfDayRepositoryImpl implements AstronomyPicOfDayRepository {
   AstronomyPicOfDayEntity fromLocalEntityToAstronomyPicOfDayEntity(
       AstronomyPicOfDayLocalEntity picOfDayLocalEntity) {
     return picOfDayLocalEntity.toAstronomyPicOfDayEntity();
+  }
+
+  AstronomyPicOfDayLocalEntity fromRemoteToAstronomyPicOfDayLocalEntity(
+      AstronomyPicOfDayRemoteEntity picOfDayRemoteEntity) {
+    return picOfDayRemoteEntity.toAstronomyPicOfDayLocalEntity();
   }
 }
 

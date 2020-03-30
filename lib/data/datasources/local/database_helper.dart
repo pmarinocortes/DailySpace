@@ -28,7 +28,7 @@ class DatabaseHelper {
 
   _onCreateTables(Database db, int version) async {
     await db.execute(
-        """CREATE TABLE astronomy_pic_of_day (date TEXT, explanation TEXT, hdurl TEXT, media_type TEXT, service_version TEXT, title TEXT, url TEXT)""");
+       "CREATE TABLE astronomy_pic_of_day (date TEXT, explanation TEXT, hdurl TEXT, media_type TEXT, service_version TEXT, title TEXT, url TEXT)");
     await db.execute(
         "CREATE TABLE mars_rover_photo (img_src TEXT, earth_date TEXT)");
   }
@@ -41,39 +41,20 @@ class DatabaseHelper {
 
   Future<AstronomyPicOfDayLocalEntity> getPicOfDay() async {
     return AstronomyPicOfDayLocalEntity(
-        date: "date",
-        explanation: "explanation",
-        hdurl: "hdurl",
-        media_type: "media_type",
-        service_version: "service_version",
-        title: "title",
-        url: "url");
+        date: 'date',
+        explanation: 'explanation',
+        hdurl: 'hdurl',
+        media_type: 'media_type',
+        service_version: 'service_version',
+        title: 'title',
+        url: 'url');
   }
 
-//  savePicOfDay(List<AstronomyPicOfDayLocalEntity> pics) async {
-//    final db = await database;
-//    for (var p in pics) {
-//      await db.insert("astronomy_pic_of_day", p.toMap(),
-//          conflictAlgorithm: ConflictAlgorithm.replace);
-//    }
-//  }
-//
-//  Future<List<AstronomyPicOfDayLocalEntity>> getPicOfDay() async {
-//    final db = await database;
-//    final List<Map<String, dynamic>> maps =
-//        await db.query("astronomy_pic_of_day");
-//
-//    return List.generate(maps.length, (i) {
-//      return AstronomyPicOfDayLocalEntity(
-//          date: maps[i]["date"],
-//          explanation: maps[i]["explanation"],
-//          hdurl: maps[i]["hdurl"],
-//          media_type: maps[i]["media_type"],
-//          service_version: maps[i]["service_version"],
-//          title: maps[i]["title"],
-//          url: maps[i]["url"]);
-//    });
-//  }
+  Future<void> deletePicOfDay(String date) async {
+    final db = await database;
+    await db
+        .delete("astronomy_pic_of_day", where: "date = ?", whereArgs: [date]);
+  }
 
   saveMarsRoverPhotos(List<MarsRoverPhotoLocalEntity> marsRoverPhotos) async {
     final Database db = await database;

@@ -16,10 +16,17 @@ class AstronomyPicOfDayLocalDataSourceImpl
   Future<AstronomyPicOfDayLocalEntity> getPicOfDay() {
     return _db.getPicOfDay();
   }
+
+  @override
+  Future<void> deletePicOfDay(String date) {
+    return _db.deletePicOfDay(date);
+  }
 }
 
 abstract class AstronomyPicOfDayLocalDataSource {
   Future<AstronomyPicOfDayLocalEntity> getPicOfDay();
 
   savePicOfDay(AstronomyPicOfDayLocalEntity picOfDay);
+
+  Future<void> deletePicOfDay(String date);
 }

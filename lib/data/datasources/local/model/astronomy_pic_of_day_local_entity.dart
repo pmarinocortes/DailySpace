@@ -20,25 +20,25 @@ class AstronomyPicOfDayLocalEntity {
 
   Map<String, dynamic> toMap() {
     return {
-      "date": date,
-      "explanation": explanation,
-      "hdurl": hdurl,
-      "media_type": media_type,
-      "service_version": service_version,
-      "title": title,
-      "url": url
+      'date': date,
+      'explanation': explanation,
+      'hdurl': hdurl,
+      'media_type': media_type,
+      'service_version': service_version,
+      'title': title,
+      'url': url
     };
   }
 
-  AstronomyPicOfDayLocalEntity.fromMap(Map<String, dynamic> map) {
-    date = map["date"];
-    explanation = map["explanation"];
-    hdurl = map["hdurl"];
-    media_type = map["media_type"];
-    service_version = map["service_version"];
-    title = map["title"];
-    url = map["url"];
-  }
+//  AstronomyPicOfDayLocalEntity.fromMap(Map<String, dynamic> map) {
+//    date = map["date"];
+//    explanation = map["explanation"];
+//    hdurl = map["hdurl"];
+//    media_type = map["media_type"];
+//    service_version = map["service_version"];
+//    title = map["title"];
+//    url = map["url"];
+//  }
 
   AstronomyPicOfDayEntity toAstronomyPicOfDayEntity() {
     return AstronomyPicOfDayEntity(

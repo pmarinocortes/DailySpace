@@ -3,8 +3,6 @@ import 'package:space_nasa/data/datasources/local/database_helper.dart';
 import 'package:space_nasa/data/datasources/local/mars_rover_photo_local_datasource.dart';
 import 'package:space_nasa/data/datasources/remote/astronomy_pic_of_day_remote_datasource.dart';
 import 'package:space_nasa/data/datasources/remote/mars_rover_photo_remote_datasource.dart';
-import 'package:space_nasa/data/datasources/remote/mars_rover_remote_datasource.dart';
-import 'package:space_nasa/data/repository/MarsRoverRepository.dart';
 import 'package:space_nasa/data/repository/astronomy_pic_of_day_repository.dart';
 import 'package:space_nasa/data/repository/mars_rover_photo_repository.dart';
 import 'package:space_nasa/domain/interactor/get_astronomy_pic_of_day_use_case.dart';
@@ -15,8 +13,13 @@ class Injection {
     return AstronomyPicOfDayDataSourceImpl();
   }
 
+  static _providesPicOfDayLocalDataSource() {
+    return AstronomyPicOfDayLocalDataSourceImpl(DatabaseHelper.db);
+  }
+
   static _providesPicOfDayRepository() {
-    return AstronomyPicOfDayRepositoryImpl(_providesPicOfDayRemoteDataSource());
+    return AstronomyPicOfDayRepositoryImpl(_providesPicOfDayRemoteDataSource(),
+        _providesPicOfDayLocalDataSource());
   }
 
   static providesGetPicOfDayUseCase() {
@@ -32,7 +35,9 @@ class Injection {
   }
 
   static _providesMarsRoverRepository() {
-    return MarsRoverPhotoRepositoryImpl(_providesMarsRoverPhotoRemoteDataSource(), _providesMarsRoverPhotoLocalDataSource());
+    return MarsRoverPhotoRepositoryImpl(
+        _providesMarsRoverPhotoRemoteDataSource(),
+        _providesMarsRoverPhotoLocalDataSource());
   }
 
   static providesGetMarsRoverPhotoUseCase() {
