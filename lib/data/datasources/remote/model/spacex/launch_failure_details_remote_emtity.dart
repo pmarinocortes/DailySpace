@@ -1,0 +1,3 @@
+class LaunchFailureDetailsRemoteEntity{
+  String reason;
+}

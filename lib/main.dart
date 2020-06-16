@@ -2,7 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:space_nasa/presentation/home.dart';
 import 'package:space_nasa/presentation/splash_screen.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   @override
@@ -17,7 +21,7 @@ class MyApp extends StatelessWidget {
         brightness: Brightness.dark,
         primarySwatch: Colors.orange
       ),
-      home: SplashScreen(),
+      home: Home(),
     );
   }
 }

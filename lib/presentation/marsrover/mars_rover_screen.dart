@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:space_nasa/domain/model/mars_rover_photo_model.dart';
@@ -32,29 +33,64 @@ class _MarsRoverScreenState extends State<MarsRoverScreen>
   Widget build(BuildContext context) {
     if (_marsRoverModel != null) {
       return Center(
-        child: ListView.builder(
+        child: GridView.builder(
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+            ),
             itemCount: _marsRoverModel.length,
             itemBuilder: (context, index) {
-              return Wrap(
-                alignment: WrapAlignment.center,
-                children: <Widget>[
-                  Padding(
-                    padding: EdgeInsets.all(10.0),
-                    child: Text(
-                      "Mars Rover Photos: " +
-                          _marsRoverModel[index].earth_date,
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold, fontSize: 16.0),
+              return Card(
+                elevation: 4.0,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0)
+                ),
+                child: Wrap(
+                  alignment: WrapAlignment.center,
+                  children: <Widget>[
+//                    Padding(
+//                      padding: EdgeInsets.all(10.0),
+//                      child: Text(
+//                        "Mars Rover Photos: " +
+//                            _marsRoverModel[index].earth_date,
+//                        style: TextStyle(
+//                            fontWeight: FontWeight.bold, fontSize: 16.0),
+//                      ),
+//                    ),
+                    Padding(
+                      padding: EdgeInsets.all(10.0),
+                      child: CachedNetworkImage(
+                        imageUrl: _marsRoverModel[index].img_src,
+                        progressIndicatorBuilder: (context, url, downloadProgress) =>
+                            CircularProgressIndicator(value: downloadProgress.progress),
+                        errorWidget: (context, url, error) => Icon(Icons.error),
+                      ),
+//                      Image.network(
+//                        _marsRoverModel[index].img_src,
+//                      ),
                     ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.all(10.0),
-                    child: Image.network(
-                      _marsRoverModel[index].img_src,
-                    ),
-                  ),
-                ],
+                  ],
+                ),
               );
+//                Wrap(
+//                alignment: WrapAlignment.center,
+//                children: <Widget>[
+//                  Padding(
+//                    padding: EdgeInsets.all(10.0),
+//                    child: Text(
+//                      "Mars Rover Photos: " +
+//                          _marsRoverModel[index].earth_date,
+//                      style: TextStyle(
+//                          fontWeight: FontWeight.bold, fontSize: 16.0),
+//                    ),
+//                  ),
+//                  Padding(
+//                    padding: EdgeInsets.all(10.0),
+//                    child: Image.network(
+//                      _marsRoverModel[index].img_src,
+//                    ),
+//                  ),
+//                ],
+//              );
             }),
       );
     } else {

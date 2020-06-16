@@ -4,6 +4,8 @@ import 'package:space_nasa/domain/model/astronomy_pic_of_day_model.dart'
     as AstronomyPicOfDayModel;
 import 'package:space_nasa/injection/injection.dart';
 import 'package:space_nasa/presentation/astronomypicofday/astronomy_pic_day_presenter.dart';
+import 'package:video_player/video_player.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class AstronomyPicOfDayScreen extends StatefulWidget {
 //  AstronomyPicOfDayScreen();
@@ -17,6 +19,9 @@ class _AstronomyPicOfDayScreenState extends State<AstronomyPicOfDayScreen>
     implements AstronomyPicOfDayViewTranslator {
   AstronomyPicOfDayPresenter _presenter;
   AstronomyPicOfDayModel.AstronomyPicOfDay _picOfDayModel;
+
+//  "https://www.youtube.com/embed/UJfpqSj7cCs?rel=0"
+
 
   _AstronomyPicOfDayScreenState() {
     _presenter = AstronomyPicOfDayPresenter(
@@ -55,7 +60,14 @@ class _AstronomyPicOfDayScreenState extends State<AstronomyPicOfDayScreen>
               ),
               padding: EdgeInsets.all(10.0),
             ),
-            Image.network(_picOfDayModel.url)
+            Container(
+              width: 400.0,
+              height: 200.0,
+              padding: EdgeInsets.all(10.0),
+              child: showMedia(),
+            )
+
+//            Image.network(_picOfDayModel.url)
           ],
         ),
       );
@@ -74,5 +86,24 @@ class _AstronomyPicOfDayScreenState extends State<AstronomyPicOfDayScreen>
     setState(() {
       _picOfDayModel = astronomyPicOfDay;
     });
+  }
+
+  Widget showMedia() {
+    if (_picOfDayModel.media_type == "video") {
+      String videoId = YoutubePlayer.convertUrlToId(_picOfDayModel.url);
+      YoutubePlayerController _controller = YoutubePlayerController(
+        initialVideoId: videoId,
+        flags: YoutubePlayerFlags(
+          autoPlay: true,
+          mute: true,
+        ),
+      );
+      return YoutubePlayer(
+        controller: _controller,
+        showVideoProgressIndicator: true,
+      );
+    } else {
+      return Image.network(_picOfDayModel.url);
+    }
   }
 }
