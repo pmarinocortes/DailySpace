@@ -1,5 +1,5 @@
 import 'package:space_nasa/domain/interactor/get_spacex_launches_use_case.dart';
-import 'package:space_nasa/domain/model/spacex_launches_model.dart';
+import 'package:space_nasa/domain/model/spacex/spacex_launches_model.dart';
 
 class SpaceXLaunchesPresenter {
   GetSpaceXLaunchesUseCase _getSpaceXLaunchesUseCase;

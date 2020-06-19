@@ -4,7 +4,6 @@ import 'package:space_nasa/domain/model/astronomy_pic_of_day_model.dart'
     as AstronomyPicOfDayModel;
 import 'package:space_nasa/injection/injection.dart';
 import 'package:space_nasa/presentation/astronomypicofday/astronomy_pic_day_presenter.dart';
-import 'package:video_player/video_player.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class AstronomyPicOfDayScreen extends StatefulWidget {

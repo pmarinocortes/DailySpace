@@ -1,6 +1,6 @@
 import 'package:space_nasa/data/repository/spacex_launches_repository.dart';
 import 'package:space_nasa/domain/data_policy.dart';
-import 'package:space_nasa/domain/model/spacex_launches_model.dart';
+import 'package:space_nasa/domain/model/spacex/spacex_launches_model.dart';
 
 class GetSpaceXLaunchesUseCase {
   SpaceXLaunchesRepository _repository;

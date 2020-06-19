@@ -203,7 +203,6 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/path_provider/path_provider.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/shared_preferences/shared_preferences.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/sqflite/sqflite.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/video_player/video_player.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/FMDB/FMDB.framework"
@@ -212,7 +211,6 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/path_provider/path_provider.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/shared_preferences/shared_preferences.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/sqflite/sqflite.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/video_player/video_player.framework"
 fi
 if [[ "$CONFIGURATION" == "Profile" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/FMDB/FMDB.framework"
@@ -221,7 +219,6 @@ if [[ "$CONFIGURATION" == "Profile" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/path_provider/path_provider.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/shared_preferences/shared_preferences.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/sqflite/sqflite.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/video_player/video_player.framework"
 fi
 if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then
   wait

@@ -1,7 +1,8 @@
 import 'dart:convert';
 
 import 'package:space_nasa/data/datasources/remote/model/spacex/launch_failure_details_remote_emtity.dart';
-import 'package:space_nasa/data/datasources/remote/model/spacex/spacex_rocket_links.dart';
+import 'package:space_nasa/data/datasources/remote/model/spacex/spacex_links_remote_entity.dart';
+import 'package:space_nasa/data/repository/model/spacex/spacex_rockets_entity.dart';
 
 List<SpaceXRocketRemoteEntity> spaceXRocketFromJson(String str) =>
     List<SpaceXRocketRemoteEntity>.from(
@@ -16,7 +17,6 @@ class SpaceXRocketRemoteEntity {
   String rocketType;
   bool launchSuccess;
   LaunchFailureDetailsRemoteEntity launchFailureDetailsRemoteEntity;
-  SpaceXRocketLinks spaceXRocketLinks;
   String details;
 
   SpaceXRocketRemoteEntity(
@@ -25,7 +25,6 @@ class SpaceXRocketRemoteEntity {
       this.rocketType,
       this.launchSuccess,
       this.launchFailureDetailsRemoteEntity,
-      this.spaceXRocketLinks,
       this.details});
 
   SpaceXRocketRemoteEntity.fromJson(Map<String, dynamic> json) {
@@ -34,8 +33,6 @@ class SpaceXRocketRemoteEntity {
     rocketType = json["rocket_type"];
     launchSuccess = json["launch_success"];
     launchFailureDetailsRemoteEntity = json["launch_failure_details"];
-    spaceXRocketLinks = json['links'] != null
-        ? new SpaceXRocketLinks.fromJson(json['links']): null;
     details = json["details"];
   }
 
@@ -45,11 +42,18 @@ class SpaceXRocketRemoteEntity {
     data["rocket_name"] = rocketName;
     data["rocket_type"] = rocketType;
     data["launch_success"] = launchSuccess;
-    data["launch_failure_details"] = launchFailureDetailsRemoteEntity;
-    if (this.spaceXRocketLinks != null) {
-      data['links'] = this.spaceXRocketLinks.toJson();
-    }
+//    data["launch_failure_details"] = launchFailureDetailsRemoteEntity;
     data["details"] = details;
     return data;
+  }
+
+  SpaceXRocketEntity toSpaceXRocketEntity() {
+    return SpaceXRocketEntity(
+        rocketId: this.rocketId,
+        rocketName: this.rocketName,
+        rocketType: this.rocketType,
+        launchSuccess: this.launchSuccess,
+//        launchFailureDetailsRemoteEntity: this.launchFailureDetailsRemoteEntity,
+        details: this.details);
   }
 }

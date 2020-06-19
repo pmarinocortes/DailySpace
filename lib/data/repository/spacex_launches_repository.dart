@@ -1,7 +1,9 @@
 import 'package:space_nasa/data/datasources/remote/model/spacex/spacex_launches_remote_entity.dart';
 import 'package:space_nasa/data/datasources/remote/spacex_lauches_remote_datasource.dart';
-import 'package:space_nasa/data/repository/model/spacex_launches_entity.dart';
+import 'package:space_nasa/data/repository/model/spacex/spacex_launches_entity.dart';
 import 'package:space_nasa/domain/data_policy.dart';
+
+import 'model/spacex/spacex_rockets_entity.dart';
 
 class SpaceXLaunchesRepositoryImpl implements SpaceXLaunchesRepository {
   SpaceXLaunchesRemoteDataSource _remoteDataSource;

@@ -2,10 +2,11 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:space_nasa/domain/model/spacex_launches_model.dart';
-import 'package:space_nasa/domain/model/spacex_launches_model.dart'
+import 'package:space_nasa/domain/model/spacex/spacex_launches_model.dart';
+import 'package:space_nasa/domain/model/spacex/spacex_launches_model.dart'
     as SpaceXLaunchesModel;
 import 'package:space_nasa/injection/injection.dart';
+import 'package:space_nasa/presentation/spacex/spacex_launches_details_screen.dart';
 import 'package:space_nasa/presentation/spacex/spacex_launches_presenter.dart';
 
 class SpaceXLaunchesScreen extends StatefulWidget {
@@ -39,67 +40,50 @@ class _SpaceXLaunchesScreenState extends State<SpaceXLaunchesScreen>
               return Wrap(
                 alignment: WrapAlignment.center,
                 children: <Widget>[
-//                  Padding(
-//                    padding: EdgeInsets.all(10.0),
-//                    child: CachedNetworkImage(
-//                      imageUrl: _spaceXLaunchesModel[index]
-//                          .spaceXRocketRemoteEntity
-//                          .spaceXRocketLinks
-//                          .missionPatch,
-//                      progressIndicatorBuilder:
-//                          (context, url, downloadProgress) =>
-//                              CircularProgressIndicator(
-//                                  value: downloadProgress.progress),
-//                      errorWidget: (context, url, error) => Icon(Icons.error),
-//                    ),
-////                    Image.network(_spaceXLaunchesModel[index].spaceXRocketRemoteEntity.spaceXRocketLinks.missionPatch)
-//                  ),
-                  Padding(
-                    padding: EdgeInsets.all(10.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Text(
+                  Card(
+                    child: Padding(
+                      padding: EdgeInsets.all(10.0),
+                      child: ListTile(
+                        leading: CachedNetworkImage(
+                          imageUrl:
+                              _spaceXLaunchesModel[index].spaceXLink != null
+                                  ? _spaceXLaunchesModel[index]
+                                      .spaceXLink
+                                      .missionPatch
+                                  : "",
+                          progressIndicatorBuilder:
+                              (context, url, downloadProgress) =>
+                                  CircularProgressIndicator(
+                                      value: downloadProgress.progress),
+                          errorWidget: (context, url, error) =>
+                              Icon(Icons.error),
+                        ),
+                        title: Text(
                           _spaceXLaunchesModel[index].missionName,
                           style: TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 16.0),
                         ),
-                        SizedBox(
-                          width: 20,
-                        ),
-                        Text(_spaceXLaunchesModel[index].launchYear,
+                        trailing: Text(_spaceXLaunchesModel[index].launchYear,
                             style: TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 16.0)),
-                      ],
+                        subtitle: Text(
+                            _spaceXLaunchesModel[index].details != null
+                                ? _spaceXLaunchesModel[index].details
+                                : ""),
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      SpaceXLaunchesDetailsScreen(
+                                          spaceXLaunchesModel: _spaceXLaunchesModel != null ? _spaceXLaunchesModel[index] : null)));
+                        },
+                      ),
                     ),
                   ),
-                  Padding(
-                    padding: EdgeInsets.all(10.0),
-                    child: Row(
-                      children: <Widget>[
-                        Text(
-                          "Rocket: ",
-                          style: TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                        Text(_spaceXLaunchesModel[index]
-                            .spaceXRocketRemoteEntity
-                            .rocketName),
-                      ],
-                    ),
-                  ),
-//                  Padding(
-//                    padding: EdgeInsets.all(10.0),
-//                    child: Row(
-//                      children: <Widget>[
-//                        Text(
-//                          "Details: ",
-//                          style: TextStyle(fontWeight: FontWeight.bold),
-//                        ),
-//                        Text(_spaceXLaunchesModel[index]
-//                            .spaceXRocketRemoteEntity
-//                            .details),
-//                      ],
-//                    ),
+//                  Opacity(
+//                    opacity: 0.0,
+//                    child: _buildPreviewWidget(index),
 //                  )
                 ],
               );
@@ -121,32 +105,4 @@ class _SpaceXLaunchesScreenState extends State<SpaceXLaunchesScreen>
       _spaceXLaunchesModel = spaceXLaunches;
     });
   }
-
-//  Widget getImage(int index) {
-//  if(_spaceXLaunchesModel[index]
-//      .spaceXRocketRemoteEntity
-//      .spaceXRocketLinks
-//      .missionPatch != null){
-//  return Padding(
-//  padding: EdgeInsets.all(10.0),
-//  child: CachedNetworkImage(
-//  imageUrl: _spaceXLaunchesModel[index]
-//      .spaceXRocketRemoteEntity
-//      .spaceXRocketLinks
-//      .missionPatch,
-//  progressIndicatorBuilder:
-//  (context, url, downloadProgress) =>
-//  CircularProgressIndicator(
-//  value: downloadProgress.progress),
-//  errorWidget: (context, url, error) => Icon(Icons.error),
-//  ),
-////                    Image.network(_spaceXLaunchesModel[index].spaceXRocketRemoteEntity.spaceXRocketLinks.missionPatch)
-//  );
-//  } else {
-//    return Padding(
-//        padding: EdgeInsets.all(10.0),
-//    child: Image.network("https://images2.imgbox.com/4d/ed/CHXoRaSP_o.png"),);
-//
-//  }
-//}
 }

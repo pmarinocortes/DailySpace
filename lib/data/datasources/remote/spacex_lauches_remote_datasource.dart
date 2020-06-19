@@ -14,21 +14,11 @@ class SpaceXLaunchesRemoteDataSourceImpl
 
   Future<List<SpaceXLaunchesRemoteEntity>> _getSpaceXLaunchesFromUri(
       Uri uri) async {
-//    return HttpHandler()
-//        .getJson(uri)
-//        .then((data) =>  SpaceXLaunchesRemoteEntity.fromJson(data));
     return HttpHandler().getJson(uri).then((data) => data
         .map<SpaceXLaunchesRemoteEntity>(
             (item) => SpaceXLaunchesRemoteEntity.fromJson(item))
         .toList());
-//    List<UserModel>.from(response.data.map((i) => UserModel.fromJson(i)));
   }
-
-//  Future<List<MarsRoverPhotoRemoteEntity>> _getMarsRoverPhotoFromUri(Uri uri) {
-//    return HttpHandler().getJson(uri).then(((data) => data["photos"]
-//        .map<MarsRoverPhotoRemoteEntity>(
-//            (item) => MarsRoverPhotoRemoteEntity.fromJson(item)).toList()));
-//  }
 }
 
 abstract class SpaceXLaunchesRemoteDataSource {
